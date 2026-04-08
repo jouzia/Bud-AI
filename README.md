@@ -3,9 +3,7 @@ title: OpenEnv Study Intelligence
 emoji: 🎓
 colorFrom: purple
 colorTo: blue
-sdk: gradio
-sdk_version: 4.36.1
-app_file: app/app.py
+sdk: docker
 pinned: false
 license: mit
 ---
