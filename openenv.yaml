@@ -1,0 +1,132 @@
+version: "2.0.0"
+name: openenv-study-intelligence
+description: >
+  A stateful, reward-driven benchmark environment for evaluating autonomous
+  LLM agents on long-horizon educational tasks. Separates strategic planning
+  (environment) from language execution (LLM), enabling rigorous, reproducible
+  agent evaluation across difficulty modes.
+
+author: "OpenEnv Research"
+license: MIT
+
+environment:
+  type: episodic-stateful
+  observation_space: continuous
+  action_space: discrete
+
+  actions:
+    - name: expand
+      description: "Add missing concepts and technical depth to the knowledge base"
+      allowed_modes: [easy, medium, hard]
+    - name: summarize
+      description: "Condense verbose content into high-signal bullet points"
+      allowed_modes: [medium, hard]
+    - name: quiz
+      description: "Generate active-recall questions to test retention"
+      allowed_modes: [hard]
+    - name: reorganize
+      description: "Apply hierarchical Markdown structure to existing notes"
+      allowed_modes: [hard]
+    - name: do_nothing
+      description: "No-op — always available, zero reward"
+      allowed_modes: [easy, medium, hard]
+
+  modes:
+    easy:
+      step_limit: 10
+      allowed_actions: [expand, do_nothing]
+      description: "Entry-level. Build completeness without constraints."
+    medium:
+      step_limit: 8
+      allowed_actions: [expand, summarize, do_nothing]
+      description: "Intermediate. Requires basic diversity strategy."
+    hard:
+      step_limit: 5
+      allowed_actions: [expand, summarize, quiz, reorganize, do_nothing]
+      description: "Expert. Every step is consequential. Penalties are severe."
+
+reward_function:
+  type: normalized-multi-objective
+  formula: "S = (w_c × C) + (w_d × D) + (w_e × E) − P"
+  components:
+    completeness:
+      symbol: C
+      weight: 0.50
+      description: "Fraction of knowledge base developed (0–1)"
+    diversity:
+      symbol: D
+      weight: 0.30
+      description: "Ratio of unique action types used to total available"
+    efficiency:
+      symbol: E
+      weight: 0.20
+      description: "High completeness achieved with fewer steps"
+    penalty:
+      symbol: P
+      description: "Cumulative deductions from constraint violations"
+
+  penalties:
+    repeat_action:   -0.30
+    illegal_action:  -0.50
+    empty_operation: -0.20
+
+  grade_thresholds:
+    "S+": 0.95
+    "S":  0.90
+    "A":  0.80
+    "B":  0.70
+    "C":  0.60
+    "F":  0.00
+
+agent:
+  type: reasoning-execution-hybrid
+  memory_engine: semantic-episodic-dual-layer
+  episodic_window: 5
+  complexity_modes: [eli5, standard, phd]
+
+  capabilities:
+    - recursive-summarization
+    - dynamic-quiz-generation
+    - state-based-planning
+    - fact-extraction
+    - human-in-the-loop-correction
+    - graceful-fallback
+
+  fact_extraction:
+    pattern: "[FACT: concept | definition]"
+    storage: semantic-memory
+    human_override: true
+
+deployment:
+  framework: gradio
+  platforms:
+    - local
+    - huggingface-spaces
+  required_env_vars:
+    - GEMINI_API_KEY
+
+reference_scores:
+  hard_mode:
+    - model: "GPT-4o"
+      score: 0.92
+      grade: S
+      failure_mode: null
+    - model: "Gemini 1.5 Pro"
+      score: 0.88
+      grade: A
+      failure_mode: "High diversity, ran out of steps"
+    - model: "Llama 3 8B"
+      score: 0.65
+      grade: C
+      failure_mode: "Repeated expand too many times — max penalty accrued"
+    - model: "Heuristic Baseline"
+      score: 0.78
+      grade: B
+      failure_mode: "Deterministic — cannot adapt to novel state configurations"
+
+roadmap:
+  - multi-agent: "One agent writes, another quizzes — adversarial co-learning"
+  - pdf-injection: "Upload real study material as the initial knowledge base"
+  - leaderboard: "Public Hugging Face Spaces leaderboard with persistent rankings"
+  - custom-rewards: "Researcher-defined reward functions via YAML config"
+  - rag-memory: "Replace key-value semantic store with ChromaDB vector retrieval"
