@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 7860
 
 # Launch the FastAPI server on port 7860
-CMD ["uvicorn", "inference.py:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["uvicorn", "inference:app", "--host", "0.0.0.0", "--port", "7860"]
