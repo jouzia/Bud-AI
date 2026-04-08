@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openenv"
+version = "2.0.0"
+authors = [
+  { name="jouzia" },
+]
+description = "State-aware AI Tutor Benchmark"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "openai",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "gradio",
+    "numpy",
+    "pandas",
+    "plotly",
+    "python-dotenv"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["core*", "app*"]
