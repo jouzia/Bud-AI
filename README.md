@@ -1,4 +1,4 @@
-Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark
+**Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark**
 
 A production-ready, multi-agent conversational assistant running on a stateful, reward-driven benchmark environment designed for complex educational task execution.
 
@@ -23,19 +23,15 @@ Bud AI transitions past monolithic single-prompt architectures. It utilizes an i
 
 ```
 
-```
-   [ User Prompt / Input UI ]
-               │
-               ▼
-   ┌────────────────────────┐
-   │   Intent Router Core   │ ─── (Parses Scope & Context)
-   └────────────────────────┘
-               │
-     ┌─────────┴─────────┐
-     ▼                   ▼
-
-```
-
+[ User Prompt / Input UI ]
+│
+▼
+┌────────────────────────┐
+│   Intent Router Core   │ ─── (Parses Scope & Context)
+└────────────────────────┘
+│
+┌─────────┴─────────┐
+▼                   ▼
 ┌─────────────────┐ ┌──────────────────┐
 │  Bud Cat Agent  │ │ Academic Teacher │ ... (Other Specialized Agents)
 │  (Ambient / UI) │ │ (Data / Coding)  │
@@ -60,25 +56,30 @@ LLMs are typically evaluated on static benchmarks (MMLU, HumanEval) which measur
 
 ### Technical Blueprint & System Architecture
 
+
+```
+
 ┌─────────────────────────────────────────────────┐
 │             Gradio UI  (app/app.py)              │
 │  conversation tree · charts · human-in-the-loop  │
 └──────────────────┬──────────────────────────────┘
-                   │  delegates to
+│  delegates to
 ┌──────────────────▼──────────────────────────────┐
 │         core.benchmark.run_episode()             │
 │         orchestration only — zero UI imports     │
 └────┬───────────────┬──────────────────┬──────────┘
-     │               │                  │
+│               │                  │
 ┌────▼────┐  ┌───────▼──────┐  ┌───────▼───────┐
 │ StudyEnv│  │ MemoryAgent  │  │    Grader     │
 │ engine  │  │ memory_agent │  │   grader.py   │
 └─────────┘  └──────┬───────┘  └───────────────┘
-                    │
-           ┌────────▼────────┐
-           │ DualLayerMemory │
-           │ episodic+semantic│
-           └─────────────────┘
+│
+┌────────▼────────┐
+│ DualLayerMemory │
+│ episodic+semantic│
+└─────────────────┘
+
+```
 
 ---
 
@@ -110,6 +111,8 @@ $$S = (0.50 \times C) + (0.30 \times D) + (0.20 \times E) - P$$
 
 ## Project Navigation Directory
 
+
+```
 
 openenv/
 ├── app/app.py                      UI layer only — zero business logic
@@ -159,7 +162,7 @@ python app/app.py           # Accessible local stream via → http://localhost:7
 
 ---
 
-## PerformRewardenchmark Index (Hard Mode)
+## Performance Benchmark Index (Hard Mode)
 
 | Model Platform | Evaluation Performance | Grade Matrix | Primary Failure Node Mode |
 | --- | --- | --- | --- |
@@ -179,3 +182,7 @@ python app/app.py           # Accessible local stream via → http://localhost:7
 ---
 
 License: MIT © Shaik Jouzia Afreen H
+
+```
+
+```
