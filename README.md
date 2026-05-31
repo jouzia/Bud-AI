@@ -1,34 +1,65 @@
----
-title: OpenEnv Study Intelligence
-emoji: 🎓
-colorFrom: purple
-colorTo: blue
-sdk: docker
-pinned: false
-license: mit
----
+Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark
 
-# OpenEnv Study Intelligence
+A production-ready, multi-agent conversational assistant running on a stateful, reward-driven benchmark environment designed for complex educational task execution.
 
-> A stateful, reward-driven benchmark for evaluating autonomous LLM agents on long-horizon educational tasks.
-
-![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
-![Gradio 4.x](https://img.shields.io/badge/gradio-4.36-orange)
-![License MIT](https://img.shields.io/badge/license-MIT-green)
+* **Application Layer:** Bud AI (Next.js / Python Custom Web Interface)
+* **Core Engine:** OpenEnv Study Intelligence (Stateful Agent Environment)
+* **Status:** Fully Functional & Deployable (Hugging Face Spaces + Vercel compatible)
 
 ---
 
-## Problem Statement
-
-LLMs are evaluated on static benchmarks (MMLU, HumanEval). These measure point-in-time language ability — not how an agent performs when past decisions compound, constraints tighten, and memory must be leveraged across steps.
-
-OpenEnv fills that gap: a **Gym-style environment for AI tutors** where the LLM handles execution and the environment handles strategy.
+## Bud AI Layer: Glassmorphism Frontend Aesthetic
+Bud AI provides a high-contrast, ultra-modern developer interface designed around a strict dark-mode layout:
+* **Brutalist Architecture:** Deep near-black backgrounds (`#0B0B0F`) to minimize cognitive fatigue.
+* **Frosted Interfaces:** UI components built as translucent, frosted glass panels with smooth backdrop blur filters and microscopic white borders.
+* **Ambient Signaling:** Subtle neon color underglows that visually pulse to signal different multi-agent execution states (e.g., active routing vs. content streaming).
 
 ---
 
-## Architecture
+## Core Multi-Agent Logic & Routing Architecture
+
+Bud AI transitions past monolithic single-prompt architectures. It utilizes an internal intent routing core that delegates tasks to specialized, context-aware agent models depending on conversational requirements.
+
 
 ```
+
+```
+   [ User Prompt / Input UI ]
+               │
+               ▼
+   ┌────────────────────────┐
+   │   Intent Router Core   │ ─── (Parses Scope & Context)
+   └────────────────────────┘
+               │
+     ┌─────────┴─────────┐
+     ▼                   ▼
+
+```
+
+┌─────────────────┐ ┌──────────────────┐
+│  Bud Cat Agent  │ │ Academic Teacher │ ... (Other Specialized Agents)
+│  (Ambient / UI) │ │ (Data / Coding)  │
+└─────────────────┘ └──────────────────┘
+│                   │
+└─────────┬─────────┘
+▼
+┌───────────────────────────┐
+│ OpenEnv Benchmark Engine  │ ─── (Calculates Step Reward / S)
+└───────────────────────────┘
+
+```
+
+---
+
+## OpenEnv Core Engine: The Benchmark Sandbox
+
+Behind the user interface sits **OpenEnv**, a Gym-style environment for AI tutors where the LLM handles execution and the environment enforces underlying strategic reasoning.
+
+### Problem Statement
+LLMs are typically evaluated on static benchmarks (MMLU, HumanEval) which measure point-in-time language ability. They fail to evaluate how an agent performs when past decisions compound, constraints tighten, and memory must be leveraged fluidly across steps. OpenEnv fixes this gap.
+
+### Technical Blueprint & System Architecture
+
 ┌─────────────────────────────────────────────────┐
 │             Gradio UI  (app/app.py)              │
 │  conversation tree · charts · human-in-the-loop  │
@@ -48,26 +79,38 @@ OpenEnv fills that gap: a **Gym-style environment for AI tutors** where the LLM 
            │ DualLayerMemory │
            │ episodic+semantic│
            └─────────────────┘
-```
 
 ---
 
-## Quickstart
+## Reward Optimization Formula
 
-```bash
-git clone https://github.com/yourname/openenv && cd openenv
-pip install -r requirements.txt
-cp .env.example .env        # add GEMINI_API_KEY
-python app/app.py           # → http://localhost:7860
-```
+The agent environment calculates programmatic feedback based on structured constraints:
 
-No API key? The heuristic baseline agent runs entirely offline.
+$$S = (0.50 \times C) + (0.30 \times D) + (0.20 \times E) - P$$
+
+| Metric Element | Full Component Context | Weight |
+| :--- | :--- | :--- |
+| **C** | Completeness Metric (Scaled 0.00 to 1.00) | **50%** |
+| **D** | Diversity Index — Unique structural action types | **30%** |
+| **E** | Efficiency Index — Rate of completeness achieved per step | **20%** |
+| **P** | Cumulative Penalty (Triggered by bad/repetitive operations) | *Subtracted* |
+
+> ⚠️ **Penalty Schedule Parameters:** Repeated Actions: `-0.30` | Illegal Conversational State: `-0.50` | Empty Operations: `-0.20`
 
 ---
 
-## Project Structure
+## Deep Feature Ecosystem
 
-```
+* **Dual-Layer Memory:** Built using an episodic ring buffer (retaining 5 historical steps) coupled to a semantic key-value store. Crucial educational facts are systematically indexed via explicit `[FACT: concept | definition]` extraction tags.
+* **Complexity Scaling Profiles:** Dynamic system runtime scaling across three functional modes: **ELI5** (Primary education vocabulary focus), **Standard** (University undergraduate level), and **PhD** (Advanced research vocabulary).
+* **Human-in-the-Loop Interventions:** Dedicated debugging dashboard allows real-time interactive adjustments mid-session. Corrections are injected directly back into semantic memory at a hardcoded weight of `1.0`.
+* **Dynamic Knowledge Graph Rendering:** Generates real-time, vector-mapped network charts via Plotly where every extracted fact morphs dynamically into connected nodes.
+
+---
+
+## Project Navigation Directory
+
+
 openenv/
 ├── app/app.py                      UI layer only — zero business logic
 ├── core/
@@ -84,98 +127,55 @@ openenv/
 │   │   └── state.py                StudyState (Pydantic v2, frozen/immutable)
 │   ├── grading/grader.py           GradeReport, letter grades, breakdown
 │   ├── memory/memory.py            DualLayerMemory: episodic ring + semantic KV
-│   ├── conversation/
-│   │   ├── tree.py                 DecisionTree engine (data-driven, no Gradio)
-│   │   └── openenv_tree.py         5-branch guided conversation node definitions
+│   └── conversation/
+│       ├── tree.py                 DecisionTree engine (data-driven, no Gradio)
+│       └── openenv_tree.py         5-branch guided conversation node definitions
 │   └── visualisation/
 │       └── knowledge_graph.py      Plotly network graph from Fact list
 ├── openenv.yaml                    machine-readable environment specification
 ├── requirements.txt                pinned production dependencies
 └── .env.example                    required environment variables
-```
-
----
-
-## Reward Formula
 
 ```
-S = (0.50 × C) + (0.30 × D) + (0.20 × E) − P
-```
-
-| Symbol | Component | Weight |
-|---|---|---|
-| C | Completeness (0–1) | 50% |
-| D | Diversity — unique action types | 30% |
-| E | Efficiency — completeness per step | 20% |
-| P | Cumulative penalty | subtracted |
-
-**Penalty schedule:** repeat action −0.30 · illegal action −0.50 · empty op −0.20
 
 ---
 
-## Key Features
-
-**Dual-layer memory** — episodic ring buffer (5 steps) + semantic key-value store. Facts extracted via `[FACT: concept | definition]` tags. Human corrections stored at confidence 1.0, never overwritten.
-
-**Complexity modes** — ELI5 (10-year-old), Standard (university), PhD (graduate). Same environment, same reward, different execution voice.
-
-**Human-in-the-loop** — intervene tab lets you correct the agent mid-session. Correction stored immediately in semantic memory and injected into the next prompt.
-
-**Knowledge graph** — live Plotly network where every extracted fact becomes a node. Human corrections shown in gold.
-
-**Guided decision tree** — 5-branch conversation tree with free-text escape hatches on every node. Zero hardcoded Gradio logic — tree is pure Python data.
-
-**Comparison matrix** — runs all agents × all modes, produces benchmark table for presentations.
-
-**Telemetry footer** — avg latency, token count, API calls, facts extracted. Makes it look like a high-end dev tool.
-
----
-
-## Reference Scores (Hard Mode)
-
-| Model | Score | Grade | Failure Mode |
-|---|---|---|---|
-| GPT-4o | 0.92 | S | None — optimal path |
-| Gemini 1.5 Pro | 0.88 | A | Ran out of steps |
-| Llama 3 8B | 0.65 | C | Repeated expand — max penalty |
-| Heuristic Baseline | 0.78 | B | Cannot adapt |
-
-Hard mode target: **≥ 0.90 (grade S).**
-
----
-
-## Deploy to Hugging Face Spaces
+## Quickstart Setup Initialization
 
 ```bash
-# requirements.txt is HF Spaces compatible
-# 1. create a Gradio Space
-# 2. push this repo
-# 3. add GEMINI_API_KEY as a Secret
-# done — no Docker needed
+# Clone repository and access directory
+git clone [https://github.com/jouzia/Bud-AI.git](https://github.com/jouzia/Bud-AI.git) && cd Bud-AI
+
+# Install environment workspace dependencies 
+pip install -r requirements.txt
+
+# Configure environment secrets
+cp .env.example .env        # Append your GEMINI_API_KEY value
+
+# Initialize execution platform
+python app/app.py           # Accessible local stream via → http://localhost:7860
+
 ```
 
 ---
 
-## Pitch (3 min)
+## PerformRewardenchmark Index (Hard Mode)
 
-**Hook (0:00):** "Most AI study tools are reactive. We built OpenEnv — the first environment that separates strategic reasoning from language execution."
-
-**Tech flex (0:30):** "The agent chose `expand` because our environment calculated low completeness. It didn't just summarise — it decided to build the foundation first."
-
-**Memory + graph (1:15):** "That [FACT] tag just became a node on the knowledge graph. The reward chart shows the penalty when the agent repeated an action. This is state-aware, memory-augmented learning."
-
-**Impact (2:15):** "We're building the benchmark for AI tutors. Before a model teaches a student, it must pass Hard Mode with score ≥ 0.90. Our environment proves even the best models struggle under efficiency constraints."
-
----
-
-## Roadmap
-
-- Multi-agent mode: one agent writes, another quizzes
-- PDF injection: upload real study material
-- Public leaderboard on Hugging Face Spaces
-- ChromaDB vector memory backend
-- Researcher-defined reward functions via YAML
+| Model Platform | Evaluation Performance | Grade Matrix | Primary Failure Node Mode |
+| --- | --- | --- | --- |
+| **GPT-4o** | 0.92 | **S** | Achieved optimal task progression vector |
+| **Gemini 1.5 Pro** | 0.88 | **A** | Context exhaustion / Step limit timeout |
+| **Llama 3 8B** | 0.65 | **C** | Repetitive expansion loop loops / Maximum penalty |
+| **Heuristic Baseline** | 0.78 | **B** | Inability to adapt to non-linear changes |
 
 ---
 
-MIT License
+## Next-Gen System Development Roadmap
+
+1. **Interactive Multi-Agent Classrooms:** Active dual-agent loops where one agent drives informational output while a secondary peer agent dynamically injects contextual quizzes.
+2. **Dynamic PDF Data Ingestion:** Automated chunking and vector processing of custom textbook and course syllabi files.
+3. **Vector Core Migration:** Swapping volatile localized storage arrays for a distributed ChromaDB persistent vector database layer.
+
+---
+
+License: MIT © Shaik Jouzia Afreen H
