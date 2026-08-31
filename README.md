@@ -56,7 +56,6 @@ LLMs are typically evaluated on static benchmarks (MMLU, HumanEval) which measur
 
 ### Technical Blueprint & System Architecture
 
-
 ```
 
 ┌─────────────────────────────────────────────────┐
