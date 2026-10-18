@@ -1,5 +1,5 @@
 **Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark**
-
+ 
 A production-ready, multi-agent conversational assistant running on a stateful, reward-driven benchmark environment designed for complex educational task execution.
 
 * **Application Layer:** Bud AI (Next.js / Python Custom Web Interface)
