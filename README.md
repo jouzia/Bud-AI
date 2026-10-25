@@ -52,6 +52,7 @@ Bud AI transitions past monolithic single-prompt architectures. It utilizes an i
 Behind the user interface sits **OpenEnv**, a Gym-style environment for AI tutors where the LLM handles execution and the environment enforces underlying strategic reasoning.
 
 ### Problem Statement
+
 LLMs are typically evaluated on static benchmarks (MMLU, HumanEval) which measure point-in-time language ability. They fail to evaluate how an agent performs when past decisions compound, constraints tighten, and memory must be leveraged fluidly across steps. OpenEnv fixes this gap.
 
 ### Technical Blueprint & System Architecture
