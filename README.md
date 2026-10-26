@@ -1,10 +1,10 @@
 **Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark**
  
-A production-ready, multi-agent conversational assistant running on a stateful, reward-driven benchmark environment designed for complex educational task execution.
+An exploratory multi-agent educational assistant prototype built around a stateful, reward-driven study environment. It is a research/engineering prototype; production readiness has not been established by deployment, security, load, or end-to-end verification.
 
 * **Application Layer:** Bud AI (Next.js / Python Custom Web Interface)
 * **Core Engine:** OpenEnv Study Intelligence (Stateful Agent Environment)
-* **Status:** Fully Functional & Deployable (Hugging Face Spaces + Vercel compatible)
+* **Status:** Prototype. A public Vercel demo has been linked externally, but this repository review has not yet established end-to-end availability or clean-install reproducibility.
 
 ---
 
@@ -144,33 +144,32 @@ openenv/
 
 ---
 
-## Quickstart Setup Initialization
+## Local Setup (verification required)
 
 ```bash
 # Clone repository and access directory
 git clone [https://github.com/jouzia/Bud-AI.git](https://github.com/jouzia/Bud-AI.git) && cd Bud-AI
 
 # Install environment workspace dependencies 
+python -m venv .venv
+# Activate the environment, then:
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 
-# Configure environment secrets
-cp .env.example .env        # Append your GEMINI_API_KEY value
+# Configure the environment variables required by core/config.py.
+# Do not commit API keys or local .env files.
+python app/app.py
 
-# Initialize execution platform
-python app/app.py           # Accessible local stream via → http://localhost:7860
+# If startup fails, check the installed dependencies, model/API configuration,
+# and the traceback before treating the local setup as verified.
 
 ```
 
 ---
 
-## Performance Benchmark Index (Hard Mode)
+## Benchmark Status
 
-| Model Platform | Evaluation Performance | Grade Matrix | Primary Failure Node Mode |
-| --- | --- | --- | --- |
-| **GPT-4o** | 0.92 | **S** | Achieved optimal task progression vector |
-| **Gemini 1.5 Pro** | 0.88 | **A** | Context exhaustion / Step limit timeout |
-| **Llama 3 8B** | 0.65 | **C** | Repetitive expansion loop loops / Maximum penalty |
-| **Heuristic Baseline** | 0.78 | **B** | Inability to adapt to non-linear changes |
+This repository does not currently provide a committed, reproducible benchmark-results artifact supporting comparative scores for GPT-4o, Gemini, Llama, and the heuristic baseline. Therefore, no comparative performance numbers are claimed here. Publish scores only with the exact evaluation prompts, model/version identifiers, run counts, scoring code, raw results, and uncertainty analysis.
 
 ---
 
@@ -181,6 +180,12 @@ python app/app.py           # Accessible local stream via → http://localhost:7
 3. **Vector Core Migration:** Swapping volatile localized storage arrays for a distributed ChromaDB persistent vector database layer.
 
 ---
+
+## Verification Status
+
+- The repository contains application and environment code, but this review has not run it from a clean environment.
+- No production-readiness or comparative benchmark claim is made.
+- Treat the external demo as unverified until a fresh browser session can complete a representative study interaction and error handling is checked.
 
 License: MIT © Shaik Jouzia Afreen H
 
