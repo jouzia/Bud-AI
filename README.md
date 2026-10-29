@@ -1,4 +1,4 @@
-**Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark**
+**Bud AI x OpenEnv: Multi-Agent Educational Platform & Intelligence Benchmark** 
  
 An exploratory multi-agent educational assistant prototype built around a stateful, reward-driven study environment. It is a research/engineering prototype; production readiness has not been established by deployment, security, load, or end-to-end verification.
 
